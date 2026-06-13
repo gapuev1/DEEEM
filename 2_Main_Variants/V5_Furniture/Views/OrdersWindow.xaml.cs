@@ -1,27 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
+using FurnitureApp.Models;
 
-namespace ExamTemplates._2_Main_Variants.V5_Furniture.Views
+namespace FurnitureApp.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для OrdersWindow.xaml
-    /// </summary>
     public partial class OrdersWindow : Window
     {
         public OrdersWindow()
         {
             InitializeComponent();
+            LoadOrders();
+            CloseBtn.Click += (s, e) => Close();
+        }
+
+        private void LoadOrders()
+        {
+            using (var db = new StoreDbContext())
+            {
+                var orders = db.Orders
+                    .Include(o => o.User)
+                    .Include(o => o.Status)
+                    .ToList();
+                OrdersGrid.ItemsSource = orders;
+            }
         }
     }
 }
