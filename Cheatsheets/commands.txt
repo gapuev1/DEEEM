@@ -1,0 +1,70 @@
+﻿╔═══════════════════════════════════════════════════════════════════════════════╗
+║                    ⚡ КОМАНДЫ ДЛЯ VISUAL STUDIO ⚡                             ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+📦 УСТАНОВКА ПАКЕТОВ (Package Manager Console)
+────────────────────────────────────────────────────────────────────────────────
+Install-Package Newtonsoft.Json
+Install-Package Microsoft.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Install-Package EPPlus
+
+🗄️ РАБОТА С БАЗОЙ ДАННЫХ (EF Core)
+────────────────────────────────────────────────────────────────────────────────
+Add-Migration InitialCreate
+Update-Database
+Remove-Migration
+
+🔌 СТРОКА ПОДКЛЮЧЕНИЯ К БД
+────────────────────────────────────────────────────────────────────────────────
+"Server=(localdb)\\MSSQLLocalDB;Database=StoreDB;Trusted_Connection=True;"
+
+🏗️ СОЗДАНИЕ ПРОЕКТА (через dotnet CLI)
+────────────────────────────────────────────────────────────────────────────────
+dotnet new wpf -n ProjectName
+cd ProjectName
+dotnet add package Newtonsoft.Json
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                          🌐 API ENDPOINTS                                     ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+Вариант 1 (Фильмы - TMDB):
+https://api.themoviedb.org/3/search/movie?api_key=КЛЮЧ&query={query}&language=ru
+
+Вариант 2 (Книги - OpenLibrary):
+https://openlibrary.org/search.json?q={query}&limit=20
+
+Вариант 3 (Товары - FakeStore):
+https://fakestoreapi.com/products
+https://fakestoreapi.com/products/{id}
+
+Вариант 4 (Погода - OpenWeather):
+https://api.openweathermap.org/data/2.5/weather?q={city}&appid=КЛЮЧ&units=metric&lang=ru
+
+Вариант 5 (Новости - NewsAPI):
+https://newsapi.org/v2/everything?q={query}&apiKey=КЛЮЧ&pageSize=20
+
+Вариант 6 (Пользователи + Задачи - JSONPlaceholder):
+https://jsonplaceholder.typicode.com/users
+https://jsonplaceholder.typicode.com/users/{userId}/todos
+
+Вариант 7 (Альбомы + Фото - JSONPlaceholder):
+https://jsonplaceholder.typicode.com/albums
+https://jsonplaceholder.typicode.com/albums/{albumId}/photos
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                          🎨 ЦВЕТА ДЛЯ ВАРИАНТОВ                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+┌────────────┬────────────────────┬─────────────────┬─────────────────────────┐
+│  Вариант   │      Тема          │   Цвет скидки   │  Цвет "нет в наличии"   │
+├────────────┼────────────────────┼─────────────────┼─────────────────────────┤
+│    В2      │    Велосипеды      │   #483D8B       │        #95A5A6          │
+│    В3      │  Стройматериалы    │   #F4A460       │        #ADD8E6          │
+│    В4      │     Игрушки        │   #FFDEAD       │        #ADD8E6          │
+│    В5      │      Мебель        │   #008080       │        #95A5A6          │
+└────────────┴────────────────────┴─────────────────┴─────────────────────────┘
+
+Пороги скидки: В2>15%, В3>12%, В4>17%, В5>15%
