@@ -1,12 +1,26 @@
-﻿<Window x:Class="ExamTemplates._2_Main_Variants.V5_Furniture.Views.OrdersWindow"
+<Window x:Class="FurnitureApp.Views.OrdersWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ExamTemplates._2_Main_Variants.V5_Furniture.Views"
-        mc:Ignorable="d"
-        Title="OrdersWindow" Height="450" Width="800">
+        Title="Заказы" 
+        Height="500" Width="800"
+        WindowStartupLocation="CenterOwner">
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
+        <Border Grid.Row="0" Background="#2C3E50" Padding="15">
+            <TextBlock Text="📦 Список заказов" FontSize="18" FontWeight="Bold" Foreground="White"/>
+        </Border>
+        
+        <DataGrid x:Name="OrdersGrid" Grid.Row="1" Margin="10" AutoGenerateColumns="True" IsReadOnly="True"/>
+        
+        <Border Grid.Row="2" Background="#34495E" Padding="10">
+            <Button x:Name="CloseBtn" Content="Закрыть" Background="#95A5A6" Foreground="White" 
+                    Width="100" HorizontalAlignment="Right" BorderThickness="0" Padding="10,5" Cursor="Hand"/>
+        </Border>
     </Grid>
 </Window>
