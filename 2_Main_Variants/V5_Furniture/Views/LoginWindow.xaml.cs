@@ -1,27 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using FurnitureApp.Models;
 
-namespace ExamTemplates._2_Main_Variants.V5_Furniture.Views
+namespace FurnitureApp.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         public LoginWindow()
         {
             InitializeComponent();
+            LoginBtn.Click += LoginBtn_Click;
+            GuestBtn.Click += GuestBtn_Click;
+        }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string login = LoginBox.Text.Trim();
+            string password = PasswordBox.Password;
+
+            try
+            {
+                using (var db = new StoreDbContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Login == login && u.Password == password);
+                    
+                    if (user != null && user.IsActive)
+                    {
+                        var mainWindow = new MainWindow(user);
+                        mainWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        ErrorText.Text = "Неверный логин или пароль!";
+                        ErrorText.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка подключения к БД: {ex.Message}", "Ошибка", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void GuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var guestUser = new User { Id = 0, Login = "guest", FullName = "Гость", Role = "Guest" };
+            var mainWindow = new MainWindow(guestUser);
+            mainWindow.Show();
+            this.Close();
         }
     }
 }
