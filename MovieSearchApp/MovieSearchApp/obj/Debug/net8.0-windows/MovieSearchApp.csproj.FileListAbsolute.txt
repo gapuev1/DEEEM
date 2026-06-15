@@ -1,0 +1,52 @@
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.exe
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.deps.json
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.runtimeconfig.json
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.dll
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.pdb
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.csproj.AssemblyReference.cache
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\Views\MovieDetailWindow.baml
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\Views\MovieDetailWindow.g.cs
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp_MarkupCompile.cache
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp_MarkupCompile.lref
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.g.resources
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.AssemblyInfoInputs.cache
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.AssemblyInfo.cs
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.csproj.CoreCompileInputs.cache
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSea.493E0AFA.Up2Date
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.dll
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\refint\MovieSearchApp.dll
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.pdb
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.genruntimeconfig.cache
+C:\Users\Drulavan\Downloads\Demo-var\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\ref\MovieSearchApp.dll
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.exe
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.deps.json
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.runtimeconfig.json
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.dll
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\MovieSearchApp.pdb
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.csproj.AssemblyReference.cache
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\Views\MovieDetailWindow.baml
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\Views\MovieDetailWindow.g.cs
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp_MarkupCompile.cache
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp_MarkupCompile.lref
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.g.resources
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.AssemblyInfoInputs.cache
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.AssemblyInfo.cs
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.csproj.CoreCompileInputs.cache
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSea.493E0AFA.Up2Date
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.dll
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\refint\MovieSearchApp.dll
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.pdb
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\MovieSearchApp.genruntimeconfig.cache
+C:\Users\Axma\Downloads\Telegram Desktop\MovieSearchApp\MovieSearchApp\MovieSearchApp\obj\Debug\net8.0-windows\ref\MovieSearchApp.dll

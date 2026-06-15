@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "SyJ7mUYN28A=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Axma\\Downloads\\Telegram Desktop\\MovieSearchApp\\MovieSearchApp\\MovieSearchApp\\MovieSearchApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Axma\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.142\\microsoft.xaml.behaviors.wpf.1.1.142.nupkg.sha512",
+    "C:\\Users\\Axma\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
