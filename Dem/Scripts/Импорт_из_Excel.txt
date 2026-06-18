@@ -1,0 +1,17 @@
+﻿Импорт через SQL Server Management Studio (SSMS)
+
+   1. Откройте SSMS, подключитесь к вашей БД.
+
+   2. Нажмите правой кнопкой на базе данных → Tasks → Import Data.
+
+   3. Выберите источник: Microsoft Excel.
+
+   4. Укажите путь к Tovar.xlsx и версию Excel (например, 2007–2010).
+
+   5. Выберите назначение: SQL Server Native Client.
+
+   6. Укажите таблицу Products (предварительно созданную).
+
+   7. Сопоставьте столбцы Excel с полями таблицы (Артикул → Article, Наименование товара → Name, Единица измерения → Unit, Цена → Price, Поставщик → Supplier, Производитель → Manufacturer, Категория товара → Category, Действующая скидка → Discount, Кол-во на складе → StockQuantity, Описание товара → Description, Фото → PhotoFileName).
+
+   8. Завершите импорт.

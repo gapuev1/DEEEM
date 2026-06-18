@@ -1,0 +1,285 @@
+﻿CREATE DATABASE Demo;
+go
+use DEMO;
+
+-- СОЗДАНИЕ ТАБЛИЦ
+
+
+-- Роли пользователей
+CREATE TABLE [Roles] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Статусы заказов
+CREATE TABLE [OrderStatuses] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Пункты выдачи
+CREATE TABLE [PickupPoints] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Address] NVARCHAR(500) NOT NULL
+);
+
+-- Поставщики
+CREATE TABLE [Suppliers] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(200) NOT NULL UNIQUE
+);
+
+-- Производители
+CREATE TABLE [Manufacturers] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(200) NOT NULL UNIQUE
+);
+
+-- Категории товаров
+CREATE TABLE [Categories] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(200) NOT NULL UNIQUE
+);
+
+-- Пользователи
+CREATE TABLE [Users] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [RoleId] INT NOT NULL FOREIGN KEY REFERENCES [Roles]([Id]),
+    [FirstName] NVARCHAR(100) NOT NULL,
+    [LastName] NVARCHAR(100) NOT NULL,
+    [Patronymic] NVARCHAR(100) NULL,
+    [Login] NVARCHAR(100) NOT NULL UNIQUE,
+    [PasswordHash] NVARCHAR(200) NOT NULL
+);
+
+-- Товары
+CREATE TABLE [Products] (
+    [Article] NVARCHAR(50) PRIMARY KEY,
+    [Name] NVARCHAR(200) NOT NULL,
+    [Unit] NVARCHAR(20) NOT NULL,
+    [Price] DECIMAL(18,2) NOT NULL CHECK ([Price] >= 0),
+    [SupplierId] INT NULL FOREIGN KEY REFERENCES [Suppliers]([Id]),
+    [ManufacturerId] INT NULL FOREIGN KEY REFERENCES [Manufacturers]([Id]),
+    [CategoryId] INT NULL FOREIGN KEY REFERENCES [Categories]([Id]),
+    [Discount] INT NOT NULL DEFAULT 0 CHECK ([Discount] BETWEEN 0 AND 100),
+    [StockQuantity] INT NOT NULL DEFAULT 0,
+    [Description] NVARCHAR(MAX) NULL,
+    [PhotoFileName] NVARCHAR(200) NULL
+);
+
+-- Заказы
+CREATE TABLE [Orders] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [OrderNumber] INT NOT NULL,
+    [OrderDate] DATETIME NOT NULL,
+    [DeliveryDate] DATETIME NULL,
+    [PickupPointId] INT NOT NULL FOREIGN KEY REFERENCES [PickupPoints]([Id]),
+    [UserId] INT NOT NULL FOREIGN KEY REFERENCES [Users]([Id]),
+    [StatusId] INT NOT NULL FOREIGN KEY REFERENCES [OrderStatuses]([Id]),
+    [PickupCode] NVARCHAR(50) NOT NULL
+);
+
+-- Состав заказа
+CREATE TABLE [OrderItems] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [OrderId] INT NOT NULL FOREIGN KEY REFERENCES [Orders]([Id]) ON DELETE CASCADE,
+    [ProductArticle] NVARCHAR(50) NOT NULL FOREIGN KEY REFERENCES [Products]([Article]),
+    [Quantity] INT NOT NULL CHECK ([Quantity] > 0)
+);
+
+
+-- ЗАПОЛНЕНИЕ ТАБЛИЦ
+
+
+SET DATEFORMAT ymd;
+
+-- 1. Роли
+INSERT INTO [Roles] ([Name]) VALUES
+(N'Администратор'),
+(N'Менеджер'),
+(N'Авторизированный клиент');
+
+-- 2. Статусы заказов
+INSERT INTO [OrderStatuses] ([Name]) VALUES
+(N'Новый'),
+(N'Завершен');
+
+-- 3. Пункты выдачи
+INSERT INTO [PickupPoints] ([Address]) VALUES
+(N'420151, г. Лесной, ул. Вишневая, 32'),
+(N'125061, г. Лесной, ул. Подгорная, 8'),
+(N'630370, г. Лесной, ул. Шоссейная, 24'),
+(N'400562, г. Лесной, ул. Зеленая, 32'),
+(N'614510, г. Лесной, ул. Маяковского, 47'),
+(N'410542, г. Лесной, ул. Светлая, 46'),
+(N'620839, г. Лесной, ул. Цветочная, 8'),
+(N'443890, г. Лесной, ул. Коммунистическая, 1'),
+(N'603379, г. Лесной, ул. Спортивная, 46'),
+(N'603721, г. Лесной, ул. Гоголя, 41'),
+(N'410172, г. Лесной, ул. Северная, 13'),
+(N'614611, г. Лесной, ул. Молодежная, 50'),
+(N'454311, г.Лесной, ул. Новая, 19'),
+(N'660007, г.Лесной, ул. Октябрьская, 19'),
+(N'603036, г. Лесной, ул. Садовая, 4'),
+(N'394060, г.Лесной, ул. Фрунзе, 43'),
+(N'410661, г. Лесной, ул. Школьная, 50'),
+(N'625590, г. Лесной, ул. Коммунистическая, 20'),
+(N'625683, г. Лесной, ул. 8 Марта'),
+(N'450983, г.Лесной, ул. Комсомольская, 26'),
+(N'394782, г. Лесной, ул. Чехова, 3'),
+(N'603002, г. Лесной, ул. Дзержинского, 28'),
+(N'450558, г. Лесной, ул. Набережная, 30'),
+(N'344288, г. Лесной, ул. Чехова, 1'),
+(N'614164, г.Лесной,  ул. Степная, 30'),
+(N'394242, г. Лесной, ул. Коммунистическая, 43'),
+(N'660540, г. Лесной, ул. Солнечная, 25'),
+(N'125837, г. Лесной, ул. Шоссейная, 40'),
+(N'125703, г. Лесной, ул. Партизанская, 49'),
+(N'625283, г. Лесной, ул. Победы, 46'),
+(N'614753, г. Лесной, ул. Полевая, 35'),
+(N'426030, г. Лесной, ул. Маяковского, 44'),
+(N'450375, г. Лесной ул. Клубная, 44'),
+(N'625560, г. Лесной, ул. Некрасова, 12'),
+(N'630201, г. Лесной, ул. Комсомольская, 17'),
+(N'190949, г. Лесной, ул. Мичурина, 26');
+
+-- 4. Поставщики
+INSERT INTO [Suppliers] ([Name]) VALUES
+(N'Kari'),
+(N'Обувь для вас');
+
+-- 5. Производители
+INSERT INTO [Manufacturers] ([Name]) VALUES
+(N'Kari'),
+(N'Marco Tozzi'),
+(N'Рос'),
+(N'Rieker'),
+(N'Alessio Nesca'),
+(N'CROSBY');
+
+-- 6. Категории
+INSERT INTO [Categories] ([Name]) VALUES
+(N'Женская обувь'),
+(N'Мужская обувь');
+
+-- 7. Пользователи
+INSERT INTO [Users] ([RoleId], [FirstName], [LastName], [Patronymic], [Login], [PasswordHash]) VALUES
+(1, N'Весения', N'Никифорова', N'Николаевна', N'94d5ous@gmail.com', N'uzWC67'),
+(1, N'Руслан', N'Сазонов', N'Германович', N'uth4iz@mail.com', N'2L6KZG'),
+(1, N'Серафим', N'Одинцов', N'Артёмович', N'yzls62@outlook.com', N'JlFRCZ'),
+(2, N'Михаил', N'Степанов', N'Артёмович', N'1diph5e@tutanota.com', N'8ntwUp'),
+(2, N'Петр', N'Ворсин', N'Евгеньевич', N'tjde7c@yahoo.com', N'YOyhfR'),
+(2, N'Елена', N'Старикова', N'Павловна', N'wpmrc3do@tutanota.com', N'RSbvHv'),
+(3, N'Анна', N'Михайлюк', N'Вячеславовна', N'5d4zbu@tutanota.com', N'rwVDh9'),
+(3, N'Елена', N'Ситдикова', N'Анатольевна', N'ptec8ym@yahoo.com', N'LdNyos'),
+(3, N'Петр', N'Ворсин', N'Евгеньевич', N'1qz4kw@mail.com', N'gynQMT'),
+(3, N'Елена', N'Старикова', N'Павловна', N'4np6se@mail.com', N'AtnDjr');
+
+-- 8. Товары
+INSERT INTO [Products] ([Article], [Name], [Unit], [Price], [SupplierId], [ManufacturerId], [CategoryId], [Discount], [StockQuantity], [Description], [PhotoFileName])
+VALUES
+('А112Т4', N'Ботинки', N'шт.', 4990, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 3, 6, N'Женские Ботинки демисезонные kari', N'1.jpg'),
+('F635R4', N'Ботинки', N'шт.', 3244, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Marco Tozzi'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 13, N'Ботинки Marco Tozzi женские демисезонные, размер 39, цвет бежевый', N'2.jpg'),
+('H782T5', N'Туфли', N'шт.', 4499, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 4, 5, N'Туфли kari мужские классика MYZ21AW-450A, размер 43, цвет: черный', N'3.jpg'),
+('G783F5', N'Ботинки', N'шт.', 5900, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Рос'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 2, 8, N'Мужские ботинки Рос-Обувь кожаные с натуральным мехом', N'4.jpg'),
+('J384T6', N'Ботинки', N'шт.', 3800, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 2, 16, N'B3430/14 Полуботинки мужские Rieker', N'5.jpg'),
+('D572U8', N'Кроссовки', N'шт.', 4100, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Рос'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 3, 6, N'129615-4 Кроссовки мужские', N'6.jpg'),
+('F572H7', N'Туфли', N'шт.', 2700, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Marco Tozzi'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 14, N'Туфли Marco Tozzi женские летние, размер 39, цвет черный', N'7.jpg'),
+('D329H3', N'Полуботинки', N'шт.', 1890, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Alessio Nesca'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 4, 4, N'Полуботинки Alessio Nesca женские 3-30797-47, размер 37, цвет: бордовый', N'8.jpg'),
+('B320R5', N'Туфли', N'шт.', 4300, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 6, N'Туфли Rieker женские демисезонные, размер 41, цвет коричневый', N'9.jpg'),
+('G432E4', N'Туфли', N'шт.', 2800, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 3, 15, N'Туфли kari женские TR-YR-413017, размер 37, цвет: черный', N'10.jpg'),
+('S213E3', N'Полуботинки', N'шт.', 2156, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 3, 6, N'407700/01-01 Полуботинки мужские CROSBY', NULL),
+('E482R4', N'Полуботинки', N'шт.', 1800, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 14, N'Полуботинки kari женские MYZ20S-149, размер 41, цвет: черный', NULL),
+('S634B5', N'Кеды', N'шт.', 5500, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 3, 0, N'Кеды Caprice мужские демисезонные, размер 42, цвет черный', NULL),
+('K345R4', N'Полуботинки', N'шт.', 2100, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 2, 3, N'407700/01-02 Полуботинки мужские CROSBY', NULL),
+('O754F4', N'Туфли', N'шт.', 5400, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 4, 18, N'Туфли женские демисезонные Rieker артикул 55073-68/37', NULL),
+('G531F4', N'Ботинки', N'шт.', 6600, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 12, 9, N'Ботинки женские зимние ROMER арт. 893167-01 Черный', NULL),
+('J542F5', N'Тапочки', N'шт.', 500, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 13, 0, N'Тапочки мужские Арт.70701-55-67син р.41', NULL),
+('B431R5', N'Ботинки', N'шт.', 2700, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 2, 5, N'Мужские кожаные ботинки/мужские ботинки', NULL),
+('P764G4', N'Туфли', N'шт.', 6800, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 15, 15, N'Туфли женские, ARGO, размер 38', NULL),
+('C436G5', N'Ботинки', N'шт.', 10200, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Alessio Nesca'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 15, 9, N'Ботинки женские, ARGO, размер 40', NULL),
+('F427R5', N'Ботинки', N'шт.', 11800, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 15, 11, N'Ботинки на молнии с декоративной пряжкой FRAU', NULL),
+('N457T5', N'Полуботинки', N'шт.', 4600, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 3, 13, N'Полуботинки Ботинки черные зимние, мех', NULL),
+('D364R4', N'Туфли', N'шт.', 12400, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 16, 5, N'Туфли Luiza Belly женские Kate-lazo черные из натуральной замши', NULL),
+('S326R5', N'Тапочки', N'шт.', 9900, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 17, 15, N'Мужские кожаные тапочки "Профиль С.Дали"', NULL),
+('L754R4', N'Полуботинки', N'шт.', 1700, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 7, N'Полуботинки kari женские WB2020SS-26, размер 38, цвет: черный', NULL),
+('M542T5', N'Кроссовки', N'шт.', 2800, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 18, 3, N'Кроссовки мужские TOFA', NULL),
+('D268G5', N'Туфли', N'шт.', 4399, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 3, 12, N'Туфли Rieker женские демисезонные, размер 36, цвет коричневый', NULL),
+('T324F5', N'Сапоги', N'шт.', 4699, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'CROSBY'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 5, N'Сапоги замша Цвет: синий', NULL),
+('K358H6', N'Тапочки', N'шт.', 599, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Kari'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Мужская обувь'), 20, 2, N'Тапочки мужские син р.41', NULL),
+('H535R5', N'Ботинки', N'шт.', 2300, (SELECT Id FROM [Suppliers] WHERE [Name]=N'Обувь для вас'), (SELECT Id FROM [Manufacturers] WHERE [Name]=N'Rieker'), (SELECT Id FROM [Categories] WHERE [Name]=N'Женская обувь'), 2, 7, N'Женские Ботинки демисезонные', NULL);
+
+-- 9. Заказы (с использованием CONVERT для безопасного преобразования дат)
+INSERT INTO [Orders] ([OrderNumber], [OrderDate], [DeliveryDate], [PickupPointId], [UserId], [StatusId], [PickupCode])
+VALUES
+(1, CONVERT(datetime, '2025-02-27', 120), CONVERT(datetime, '2025-04-20', 120), 1, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Степанов' AND [FirstName]=N'Михаил' AND [Patronymic]=N'Артёмович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '901'),
+(2, CONVERT(datetime, '2022-09-28', 120), CONVERT(datetime, '2025-04-21', 120), 11, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Никифорова' AND [FirstName]=N'Весения' AND [Patronymic]=N'Николаевна'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '902'),
+(3, CONVERT(datetime, '2025-03-21', 120), CONVERT(datetime, '2025-04-22', 120), 2, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Сазонов' AND [FirstName]=N'Руслан' AND [Patronymic]=N'Германович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '903'),
+(4, CONVERT(datetime, '2025-02-20', 120), CONVERT(datetime, '2025-04-23', 120), 11, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Одинцов' AND [FirstName]=N'Серафим' AND [Patronymic]=N'Артёмович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '904'),
+(5, CONVERT(datetime, '2025-03-17', 120), CONVERT(datetime, '2025-04-24', 120), 2, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Степанов' AND [FirstName]=N'Михаил' AND [Patronymic]=N'Артёмович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '905'),
+(6, CONVERT(datetime, '2025-03-01', 120), CONVERT(datetime, '2025-04-25', 120), 15, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Никифорова' AND [FirstName]=N'Весения' AND [Patronymic]=N'Николаевна'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '906'),
+(7, CONVERT(datetime, '2025-02-28', 120), CONVERT(datetime, '2025-04-26', 120), 3, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Сазонов' AND [FirstName]=N'Руслан' AND [Patronymic]=N'Германович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Завершен'), '907'),
+(8, CONVERT(datetime, '2025-03-31', 120), CONVERT(datetime, '2025-04-27', 120), 19, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Одинцов' AND [FirstName]=N'Серафим' AND [Patronymic]=N'Артёмович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Новый'), '908'),
+(9, CONVERT(datetime, '2025-04-02', 120), CONVERT(datetime, '2025-04-28', 120), 5, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Степанов' AND [FirstName]=N'Михаил' AND [Patronymic]=N'Артёмович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Новый'), '909'),
+(10, CONVERT(datetime, '2025-04-03', 120), CONVERT(datetime, '2025-04-29', 120), 19, (SELECT [Id] FROM [Users] WHERE [LastName]=N'Степанов' AND [FirstName]=N'Михаил' AND [Patronymic]=N'Артёмович'), (SELECT [Id] FROM [OrderStatuses] WHERE [Name]=N'Новый'), '910');
+
+-- 10. Состав заказов
+-- Заказ 1
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'А112Т4', 2 FROM [Orders] WHERE [OrderNumber]=1
+UNION ALL
+SELECT [Id], N'F635R4', 2 FROM [Orders] WHERE [OrderNumber]=1;
+
+-- Заказ 2
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'H782T5', 1 FROM [Orders] WHERE [OrderNumber]=2
+UNION ALL
+SELECT [Id], N'G783F5', 1 FROM [Orders] WHERE [OrderNumber]=2;
+
+-- Заказ 3
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'J384T6', 10 FROM [Orders] WHERE [OrderNumber]=3
+UNION ALL
+SELECT [Id], N'D572U8', 10 FROM [Orders] WHERE [OrderNumber]=3;
+
+-- Заказ 4
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'F572H7', 5 FROM [Orders] WHERE [OrderNumber]=4
+UNION ALL
+SELECT [Id], N'D329H3', 4 FROM [Orders] WHERE [OrderNumber]=4;
+
+-- Заказ 5
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'А112Т4', 2 FROM [Orders] WHERE [OrderNumber]=5
+UNION ALL
+SELECT [Id], N'F635R4', 2 FROM [Orders] WHERE [OrderNumber]=5;
+
+-- Заказ 6
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'H782T5', 1 FROM [Orders] WHERE [OrderNumber]=6
+UNION ALL
+SELECT [Id], N'G783F5', 1 FROM [Orders] WHERE [OrderNumber]=6;
+
+-- Заказ 7
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'J384T6', 10 FROM [Orders] WHERE [OrderNumber]=7
+UNION ALL
+SELECT [Id], N'D572U8', 10 FROM [Orders] WHERE [OrderNumber]=7;
+
+-- Заказ 8
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'F572H7', 5 FROM [Orders] WHERE [OrderNumber]=8
+UNION ALL
+SELECT [Id], N'D329H3', 4 FROM [Orders] WHERE [OrderNumber]=8;
+
+-- Заказ 9
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'B320R5', 5 FROM [Orders] WHERE [OrderNumber]=9
+UNION ALL
+SELECT [Id], N'G432E4', 1 FROM [Orders] WHERE [OrderNumber]=9;
+
+-- Заказ 10
+INSERT INTO [OrderItems] ([OrderId], [ProductArticle], [Quantity])
+SELECT [Id], N'S213E3', 5 FROM [Orders] WHERE [OrderNumber]=10
+UNION ALL
+SELECT [Id], N'E482R4', 5 FROM [Orders] WHERE [OrderNumber]=10;
